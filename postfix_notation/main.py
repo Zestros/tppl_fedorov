@@ -1,4 +1,5 @@
 import sys
+import os
 
 def add(x: float, y: float) -> float:
     return x + y
@@ -70,11 +71,18 @@ def evaluate(expression: str) -> float:
 
 def main() -> int:
     """Прочитать выражение из аргументов командной строки"""
-    expression = " ".join(sys.argv[1:])
-    if not expression.strip():
+    args = sys.argv[1:]
+    if not args:
         print('Укажите выражение, например: python3 main.py "3 0 4 ~ 2 ~"',
               file=sys.stderr)
         return 1
+
+    args = [
+        "~" if arg == os.path.expanduser("~") else arg
+        for arg in args
+    ]
+
+    expression = " ".join(args)
 
     try:
         result = evaluate(expression)
