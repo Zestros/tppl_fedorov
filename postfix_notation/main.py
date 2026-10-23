@@ -23,6 +23,9 @@ def tilda(x: float, y: float, stack: list[float]) -> float:
     stack.clear()
     return result
 
+def znac(x: float, y: float) -> float:
+    return x ** y
+
 
 def evaluate(expression: str) -> float:
     """Вычислить выражение и вывести состояние стека после каждого шага"""
@@ -37,6 +40,7 @@ def evaluate(expression: str) -> float:
         "*": multiply,
         "/": divide,
         "~": tilda,
+	"!": znac
     }
 
     for token in expression_list:
