@@ -1,7 +1,7 @@
 import pytest
 from main import main
 
-from main import add, subtract, multiply, divide, tilda, evaluate
+from main import add, subtract, multiply, divide, tilda, evaluate, znac
 
 
 @pytest.mark.parametrize("x, y, expected", [(2, 3, 5), (-2, 2, 0), (0.1, 0.2, 0.3)])
@@ -93,3 +93,9 @@ def test_main_without_expression(monkeypatch):
 def test_main_with_error(monkeypatch):
     monkeypatch.setattr("sys.argv", ["main.py", "5 0 /"])
     assert main() == 1
+
+@pytest.mark.parametrize("x, y, expected", [(7, 0, 1), (-6, 2, 36), (0, 10, 0)])
+def test_power(x, y, expected):
+    assert znac(x, y) == pytest.approx(expected)
+
+
